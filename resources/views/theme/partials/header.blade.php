@@ -38,14 +38,23 @@
                     <!-- End - Add new blog -->
 
                     <ul class="nav navbar-nav navbar-right navbar-social">
-                        <a href="#" class="btn btn-sm btn-warning">Register / Login</a>
-                        <!-- <li class="nav-item submenu dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">Welcome User</a>
-            <ul class="dropdown-menu">
-              <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
-            </ul>
-          </li> -->
+                        @if (!Auth::check())
+                            <a href="{{ route('register') }}" class="btn btn-sm btn-warning">Register / Login</a>
+                        @else
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
+                                    <li class="nav-item">
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <a class="nav-link" href="javascript:$('form').submit();">Logout</a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
