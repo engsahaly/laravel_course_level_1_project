@@ -20,78 +20,28 @@
         <!--================Hero Banner end =================-->
 
         <!--================ Blog slider start =================-->
-        <section>
-            <div class="container">
-                <div class="owl-carousel owl-theme blog-slider">
-                    <div class="card blog__slide text-center">
-                        <div class="blog__slide__img">
-                            <img class="card-img rounded-0" src="{{ asset('assets') }}/img/blog/blog-slider/blog-slide1.png"
-                                alt="">
-                        </div>
-                        <div class="blog__slide__content">
-                            <a class="blog__slide__label" href="#">Fashion</a>
-                            <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                            <p>2 days ago</p>
-                        </div>
-                    </div>
-                    <div class="card blog__slide text-center">
-                        <div class="blog__slide__img">
-                            <img class="card-img rounded-0" src="{{ asset('assets') }}/img/blog/blog-slider/blog-slide2.png"
-                                alt="">
-                        </div>
-                        <div class="blog__slide__content">
-                            <a class="blog__slide__label" href="#">Fashion</a>
-                            <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                            <p>2 days ago</p>
-                        </div>
-                    </div>
-                    <div class="card blog__slide text-center">
-                        <div class="blog__slide__img">
-                            <img class="card-img rounded-0" src="{{ asset('assets') }}/img/blog/blog-slider/blog-slide3.png"
-                                alt="">
-                        </div>
-                        <div class="blog__slide__content">
-                            <a class="blog__slide__label" href="#">Fashion</a>
-                            <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                            <p>2 days ago</p>
-                        </div>
-                    </div>
-                    <div class="card blog__slide text-center">
-                        <div class="blog__slide__img">
-                            <img class="card-img rounded-0" src="{{ asset('assets') }}/img/blog/blog-slider/blog-slide1.png"
-                                alt="">
-                        </div>
-                        <div class="blog__slide__content">
-                            <a class="blog__slide__label" href="#">Fashion</a>
-                            <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                            <p>2 days ago</p>
-                        </div>
-                    </div>
-                    <div class="card blog__slide text-center">
-                        <div class="blog__slide__img">
-                            <img class="card-img rounded-0" src="{{ asset('assets') }}/img/blog/blog-slider/blog-slide2.png"
-                                alt="">
-                        </div>
-                        <div class="blog__slide__content">
-                            <a class="blog__slide__label" href="#">Fashion</a>
-                            <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                            <p>2 days ago</p>
-                        </div>
-                    </div>
-                    <div class="card blog__slide text-center">
-                        <div class="blog__slide__img">
-                            <img class="card-img rounded-0" src="{{ asset('assets') }}/img/blog/blog-slider/blog-slide3.png"
-                                alt="">
-                        </div>
-                        <div class="blog__slide__content">
-                            <a class="blog__slide__label" href="#">Fashion</a>
-                            <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                            <p>2 days ago</p>
-                        </div>
+        @if (count($sliderBlogs) > 0)
+            <section>
+                <div class="container">
+                    <div class="owl-carousel owl-theme blog-slider">
+                        @foreach ($sliderBlogs as $blog)
+                            <div class="card blog__slide text-center">
+                                <div class="blog__slide__img">
+                                    <img class="card-img rounded-0" src="{{ asset("storage/blogs/$blog->image") }}"
+                                        alt="" height="100px">
+                                </div>
+                                <div class="blog__slide__content">
+                                    <a class="blog__slide__label"
+                                        href="{{ route('theme.category', ['id' => $blog->category->id]) }}">{{ $blog->category->name }}</a>
+                                    <h3><a href="{{ route('blogs.show', ['blog' => $blog]) }}">{{ $blog->name }}</a></h3>
+                                    <p>{{ $blog->created_at->format('d M Y') }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
         <!--================ Blog slider end =================-->
 
         <!--================ Start Blog Post Area =================-->
